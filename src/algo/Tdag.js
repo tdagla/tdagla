@@ -27,7 +27,7 @@ export class Tdag {
      * @param {number} x1
      * @param {boolean} render
      */
-    setNode({id, x0, x1, render=false}) {
+    setNode({id, x0, x1, render=true}) {
         const data = new VertexLayout(x0, x1, 0, render, 'node-' + id);
         this._graph.addNode(id, data);
 
