@@ -32,7 +32,7 @@ const {points} = tdag.getEdge(0, 1)
 
 # Browser Scripts
 
-We provide browser-ready scripts `tdagla.min.js`. You can find it in the `dist` folder.
+We provide a browser-ready script `tdagla.min.js`. You can find it in the `dist` folder.
 
 # Source Build
 Before building this library, you need to install `Node.js`. Then, run following commands from the root of the project:_
