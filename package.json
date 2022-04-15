@@ -1,0 +1,26 @@
+{
+  "name": "tdagla",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/tdagla.min.js",
+  "scripts": {
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carl-Rabbit/tdagla.git"
+  },
+  "author": "Carl Rabbit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carl-Rabbit/tdagla/issues"
+  },
+  "homepage": "https://github.com/Carl-Rabbit/tdagla#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+  }
+}
