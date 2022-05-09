@@ -36,6 +36,7 @@ const edge = tdag.getEdge(0, 2)
 const edges = tdag.getEdges()
 ```
 You can use D3 or any other approaches to visualize the result:
+
 ![(Example1](./img/example1.png)
 
 This example file is provided in the folder `examples`.
