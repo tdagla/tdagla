@@ -35,7 +35,7 @@ const nodes = tdag.getNodes()
 const edge = tdag.getEdge(0, 2)
 const edges = tdag.getEdges()
 ```
-You can use D3 or any other approaches to visualize the result:
+You can use D3 or any other approach to visualize the result:
 
 ![(Example1](./img/example1.png)
 
@@ -46,7 +46,7 @@ This example file is provided in the folder `examples`.
 We provide a browser-ready script `tdagla.min.js`. You can find it in the `dist` folder.
 
 # Source Build
-Before building this library, you need to install `Node.js`. Then, run following commands from the root of the project:
+Before building this library, you need to install `Node.js`. Then, run these commands from the root of the project:
 ```bash
 npm install
 npm run build
