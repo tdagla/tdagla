@@ -43,13 +43,13 @@ export class TDAGLayoutAlgo {
             const dstNodes = curNode.outEdges.map(e => e.dst);
             // find dst node closest to it
             let closestDstNode = null;
-            if (dstNodes.every(node => !node.data.toRender)) {
+            if (dstNodes.every(node => !node.data.render)) {
                 // just pick the first one
                 closestDstNode = dstNodes[0];
             } else {
                 // find the closest dst node
                 dstNodes.forEach(dstNode => {
-                    if (!dstNode.data.toRender) {
+                    if (!dstNode.data.render) {
                         return;
                     }
                     if (closestDstNode === null || closestDstNode.data.x0 > dstNode.data.x0) {
@@ -132,7 +132,7 @@ export class TDAGLayoutAlgo {
             .map(e => e.src);
 
         if (children.length === 0) {
-            if (node.data.toRender) {
+            if (node.data.render) {
                 localLineMap.set(node.id, 0);
                 const blocks = MapUtils.computeIfAbsent(localBlocksMap, 0, () => []);
                 blocks.push(node);
@@ -227,7 +227,7 @@ export class TDAGLayoutAlgo {
 
         /* find a line for current node */
 
-        if (node.data.toRender) {
+        if (node.data.render) {
             const maxLine = Math.max(...localLineMap.values());
             let minScore = Infinity;
             let bestLine = -2;
@@ -320,7 +320,7 @@ export class TDAGLayoutAlgo {
                             /** @type {TDAGLayoutAlgo~Node[]} */
                             const lastNodesInEachLine = [];
                             const start = localLineMap.get(child.id);
-                            for (let line = Math.min(start, bestLine); line <= Math.max(start,bestLine); ++line) {
+                            for (let line = Math.min(start, bestLine); line <= Math.max(start, bestLine); ++line) {
                                 const nodesOnTheLeft = localBlocksMap.get(line)
                                     .filter(b => b.data.x0 < node.data.x0);
                                 const lastNode = ArrayUtils.findMax(nodesOnTheLeft,
@@ -330,7 +330,6 @@ export class TDAGLayoutAlgo {
                                 }
                             }
                             let endPoint = maxEnd;
-                            // console.log(node.data.vertexName, lastNodesInEachLine, localLineMap.get(child.id), bestLine);
                             if (lastNodesInEachLine.length > 0) {
                                 /** @type {number[]} */
                                 const endPoints = lastNodesInEachLine.map(precursor => {

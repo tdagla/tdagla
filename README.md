@@ -11,8 +11,11 @@ const tdag = tdagla.create()
 ### Step 2: Set nodes and edges
 ```js
 tdag.setNode({id: 0, x0: 0, x1: 100})
-    .setNode({id: 1, x0: 150, x1: 150})
-    .setEdge({src: 0, dst: 1})
+    .setNode({id: 1, x0: 50, x1: 175})
+    .setNode({id: 2, x0: 150, x1: 250})
+
+tdag.setEdge({src: 0, dst: 2})
+    .setEdge({src: 1, dst: 2})
 ```
 
 ### Step 3: Lay out
@@ -26,17 +29,23 @@ tdag.layout()           // lay out TDAG
 
 ### Step 4: Get result
 ```js
-const {x0, x1, y} = tdag.getNode(0)
-const {points} = tdag.getEdge(0, 1)
+const node = tdag.getNode(0)
+const nodes = tdag.getNodes()
+
+const edge = tdag.getEdge(0, 2)
+const edges = tdag.getEdges()
 ```
+You can use D3 or any other approaches to visualize the result:
+![(Example1](./img/example1.png)
+
+This example file is provided in the folder `examples`.
 
 # Browser Scripts
 
 We provide a browser-ready script `tdagla.min.js`. You can find it in the `dist` folder.
 
 # Source Build
-Before building this library, you need to install `Node.js`. Then, run following commands from the root of the project:_
-
+Before building this library, you need to install `Node.js`. Then, run following commands from the root of the project:
 ```bash
 npm install
 npm run build

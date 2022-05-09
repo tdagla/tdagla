@@ -1,9 +1,5 @@
 import {Tdag} from "@/algo/Tdag";
 
-function create() {
+export function create() {
     return new Tdag();
-}
-
-export const tdagla = {
-    create,
 }

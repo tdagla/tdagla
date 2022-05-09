@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example1</title>
+</head>
+<body>
+<div id="container"></div>
+<script src="../dist/tdagla.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@5"></script>
+<script>
+    const gap = 20
+    const lineHeight = 20
+    const lineSpace = 14
+
+    /* Create TDAG */
+
+    const tdag = tdagla.create()
+
+    tdag.setNode({id: 0, x0: 0, x1: 100})
+        .setNode({id: 1, x0: 50, x1: 175})
+        .setNode({id: 2, x0: 150, x1: 250})
+
+    tdag.setEdge({src: 0, dst: 2})
+        .setEdge({src: 1, dst: 2})
+
+    tdag.setGap(gap)         // the minimum distance between adjacent nodes on the same line (default: 20)
+        .setLineHeight(lineHeight)  // i.e., the height of node (default: 10)
+        .setLineSpace(lineSpace)    // the distance between two lines (default: 5)
+
+    tdag.layout()           // lay out TDAG
+
+    console.log(tdag.getNode(0))
+    console.log(tdag.getNodes())
+
+    console.log(tdag.getEdge(0, 2))
+    console.log(tdag.getEdges())
+
+    /* Draw TDAG */
+
+    const nodes = tdag.getNodes()
+    const edges = tdag.getEdges()
+
+    const width = 800
+    const height = 500
+    const marginTop = 20
+    const marginLeft = 20
+
+    const nodeColor = '#4A93C5FF'
+    const edgeColor = 'gray'
+    const nodeRound = 4
+
+    const svg = d3.select('#container').append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+    svg.append('g')
+        .attr('id', 'node-container')
+        .attr('transform', `translate(${marginTop},${marginLeft})`)
+        .selectAll('rect')
+        .data(nodes)
+        .enter()
+        .append('rect')
+        .attr('id', node => node.id)
+        .classed('node', true)
+        .attr('x', node => node.x0)
+        .attr('y', node => node.y)
+        .attr('rx', nodeRound)
+        .attr('ry', nodeRound)
+        .attr('width', node => node.x1 - node.x0)
+        .attr('height', lineHeight)
+        .attr('fill', nodeColor)
+
+    const lineGen = d3.line().x(p => p[0]).y(p => p[1]).curve(d3.curveBasis)
+    svg.append('g')
+        .attr('id', 'edge-container')
+        .attr('transform', `translate(${marginTop},${marginLeft})`)
+        .selectAll('path')
+        .data(edges)
+        .enter()
+        .append('path')
+        .attr('id', edge => edge.id)
+        .classed('edge', true)
+        .attr('stroke', edgeColor)
+        .attr('fill', 'none')
+        .attr('d', edge => lineGen(edge.points))
+
+    svg.append('g')
+        .attr('id', 'text-container')
+        .attr('transform', `translate(${marginTop},${marginLeft})`)
+        .selectAll('text')
+        .data(nodes)
+        .enter()
+        .append('text')
+        .attr('id', node => 'text-' + node.id)
+        .classed('text', true)
+        .attr('x', node => node.x0)
+        .attr('y', node => node.y)
+        .attr('dx', 0)
+        .attr('dy', -2)
+        .attr('font-size', '12px')
+        .text(node => node.id)
+
+</script>
+</body>
+</html>
